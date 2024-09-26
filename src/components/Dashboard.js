@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styles from './Dashboard.module.css';
 
 const antivirusEngines = [
   { name: 'Windows Defender', color: '#3b82f6' },
@@ -51,64 +52,57 @@ const Dashboard = () => {
   }, [scanComplete]);
 
   return (
-    <div style={{ padding: '24px', maxWidth: '800px', margin: '0 auto' }}>
-      <h1 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '24px' }}>Multi-Antivirus Scanner Dashboard</h1>
+    <div className={styles.container}>
+      <h1 className={styles.title}>Multi-Antivirus Scanner Dashboard</h1>
       
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', marginBottom: '24px' }}>
+      <div className={styles.engineGrid}>
         {antivirusEngines.map((engine) => (
-          <div key={engine.name} style={{ border: '1px solid #e5e7eb', borderRadius: '8px', padding: '16px' }}>
-            <h2 style={{ fontSize: '14px', fontWeight: 'medium', marginBottom: '8px' }}>{engine.name}</h2>
-            <div style={{ width: '100%', height: '8px', backgroundColor: engine.color, borderRadius: '4px' }}></div>
+          <div key={engine.name} className={styles.engineCard}>
+            <h2 className={styles.engineName}>{engine.name}</h2>
+            <div className={styles.engineBar} style={{backgroundColor: engine.color}}></div>
           </div>
         ))}
       </div>
 
-      <div style={{ border: '1px solid #e5e7eb', borderRadius: '8px', padding: '16px', marginBottom: '24px' }}>
-        <h2 style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '8px' }}>Scan Progress</h2>
-        <div style={{ width: '100%', height: '8px', backgroundColor: '#e5e7eb', borderRadius: '4px' }}>
-          <div style={{ width: `${progress}%`, height: '100%', backgroundColor: '#3b82f6', borderRadius: '4px' }}></div>
+      <div className={styles.progressCard}>
+        <h2 className={styles.cardTitle}>Scan Progress</h2>
+        <div className={styles.progressBarContainer}>
+          <div className={styles.progressBar} style={{width: `${progress}%`}}></div>
         </div>
-        <div style={{ marginTop: '8px', fontSize: '14px', color: '#6b7280' }}>{progress}% Complete</div>
+        <div className={styles.progressText}>{progress}% Complete</div>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
+      <div className={styles.actionArea}>
         <button 
           onClick={startScan} 
           disabled={scanning}
-          style={{ 
-            padding: '8px 16px', 
-            backgroundColor: scanning ? '#9ca3af' : '#3b82f6', 
-            color: 'white', 
-            border: 'none', 
-            borderRadius: '4px', 
-            cursor: scanning ? 'not-allowed' : 'pointer' 
-          }}
+          className={scanning ? styles.buttonDisabled : styles.button}
         >
           {scanning ? 'Scanning...' : 'Start Scan'}
         </button>
         {scanComplete && (
-          <div style={{ padding: '8px 16px', backgroundColor: '#f3f4f6', borderRadius: '4px' }}>
-            <p style={{ fontWeight: 'bold' }}>Scan Completed</p>
+          <div className={styles.alertBox}>
+            <p className={styles.alertTitle}>Scan Completed</p>
             <p>All files have been scanned. Check the results below.</p>
           </div>
         )}
       </div>
 
-      <div style={{ border: '1px solid #e5e7eb', borderRadius: '8px', padding: '16px' }}>
-        <h2 style={{ fontSize: '16px', fontWeight: 'bold', marginBottom: '8px' }}>Scan Results</h2>
+      <div className={styles.resultsCard}>
+        <h2 className={styles.cardTitle}>Scan Results</h2>
         {results.length > 0 ? (
-          <ul style={{ listStyle: 'none', padding: 0 }}>
+          <ul className={styles.resultsList}>
             {results.map((file, index) => (
-              <li key={index} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px', backgroundColor: '#f3f4f6', borderRadius: '4px', marginBottom: '8px' }}>
+              <li key={index} className={styles.resultItem}>
                 <span>{file.fileName}</span>
-                <span style={{ color: file.status === 'clean' ? '#22c55e' : '#ef4444' }}>
+                <span className={file.status === 'clean' ? styles.statusClean : styles.statusInfected}>
                   {file.status === 'clean' ? 'Clean' : 'Infected'}
                 </span>
               </li>
             ))}
           </ul>
         ) : (
-          <p style={{ textAlign: 'center', color: '#6b7280' }}>No scan results yet. Start a scan to see results.</p>
+          <p className={styles.noResults}>No scan results yet. Start a scan to see results.</p>
         )}
       </div>
     </div>
