@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+# Multi-Antivirus Scanner Dashboard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+The **Multi-Antivirus Scanner Dashboard** is a web-based application built with React that simulates scanning files for viruses using multiple antivirus engines. It provides a user-friendly interface to initiate scans, display progress, and present scan results. Additionally, the application is integrated with Electron to create a cross-platform desktop application.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Multi-Antivirus Support**: Simulates scanning files with multiple antivirus engines.
+- **Scan Progress Tracking**: Displays the progress of the scanning operation.
+- **Scan Results Display**: Shows results indicating whether files are clean or infected.
+- **Desktop Application**: Built with Electron for a native desktop experience.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Technologies Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Frontend**: React, CSS Modules
+- **Backend**: Electron (for desktop application)
+- **Icons**: Lucide React (for UI icons)
 
-### `npm test`
+## Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To set up the project locally, follow these steps:
 
-### `npm run build`
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/multi-antivirus-scanner-dashboard.git
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Navigate to the project directory:
+   ```bash
+   cd multi-antivirus-scanner-dashboard
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Install the required dependencies:
+   ```bash
+   npm install
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. To run the application in development mode:
+   ```bash
+   npm start
+   ```
 
-### `npm run eject`
+To build the Electron app, you may need to package it using a tool like electron-packager or electron-builder. Follow their respective documentation for packaging instructions.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Usage
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Launch the application to view the dashboard.
+2. Click on the Start Scan button to initiate a scan.
+3. Monitor the progress bar for scanning updates.
+4. Once completed, check the scan results displayed below.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Running Electron
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To run the Electron version of the app:
 
-## Learn More
+1. Ensure you have Electron installed. If not, install it globally:
+   ```bash
+   npm install -g electron
+   ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2. Start the Electron application:
+   ```bash
+   electron .
+   ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This will open the application in a native window.
 
-### Code Splitting
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Contributions are welcome! Please feel free to submit a pull request or open an issue if you have any suggestions or improvements.
