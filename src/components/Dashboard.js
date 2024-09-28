@@ -11,65 +11,104 @@ const mockScanResults = [
   { fileName: 'document1.pdf', status: 'clean' },
   { fileName: 'image.jpg', status: 'infected' },
   { fileName: 'script.js', status: 'clean' },
-  { fileName: 'archive.zip', status: 'infected' },
 ];
 
 const Dashboard = () => {
   const [scanning, setScanning] = useState(false);
-  const [progress, setProgress] = useState(0);
+  const [overallProgress, setOverallProgress] = useState(0);
   const [scanComplete, setScanComplete] = useState(false);
   const [results, setResults] = useState([]);
+  const [loadingProgress, setLoadingProgress] = useState({});
 
   useEffect(() => {
+    let overallInterval;
+    let engineIntervals = [];
+
     if (scanning) {
-      const interval = setInterval(() => {
-        setProgress((prevProgress) => {
+      // Reset progress for each engine
+      setLoadingProgress(antivirusEngines.reduce((acc, engine) => {
+        acc[engine.name] = 0;
+        return acc;
+      }, {}));
+
+      // Start overall progress interval
+      overallInterval = setInterval(() => {
+        setOverallProgress((prevProgress) => {
           if (prevProgress >= 100) {
-            clearInterval(interval);
-            setScanning(false);
-            setScanComplete(true);
+            clearInterval(overallInterval);
             return 100;
           }
-          return prevProgress + 10;
+          return Math.min(prevProgress + 10, 100); // Increase progress by 10%
         });
-      }, 500);
+      }, 500); // Overall progress every 0.5 seconds
 
-      return () => clearInterval(interval);
+      // Start individual engine progress intervals
+      engineIntervals = antivirusEngines.map((engine) => {
+        return setInterval(() => {
+          setLoadingProgress((prevProgress) => {
+            const newProgress = Math.min(prevProgress[engine.name] + 20, 100); // Increase each engine's progress by 20%
+            if (newProgress >= 100) {
+              clearInterval(engineIntervals);
+              return { ...prevProgress, [engine.name]: 100 };
+            }
+            return { ...prevProgress, [engine.name]: newProgress };
+          });
+        }, 500);
+      });
+
+      return () => {
+        clearInterval(overallInterval);
+        engineIntervals.forEach(clearInterval);
+      };
     }
   }, [scanning]);
 
   const startScan = () => {
     setScanning(true);
     setScanComplete(false);
-    setProgress(0);
+    setOverallProgress(0);
     setResults([]);
   };
 
   useEffect(() => {
-    if (scanComplete) {
+    if (overallProgress >= 100) {
+      setScanComplete(true);
       setResults(mockScanResults);
     }
-  }, [scanComplete]);
+  }, [overallProgress]);
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Multi-Antivirus Scanner Dashboard</h1>
-      
-      <div className={styles.engineGrid}>
+
+      <div className={styles.grid}>
         {antivirusEngines.map((engine) => (
           <div key={engine.name} className={styles.engineCard}>
             <h2 className={styles.engineName}>{engine.name}</h2>
-            <div className={styles.engineBar} style={{backgroundColor: engine.color}}></div>
+            <div className={styles.progressBarContainer}>
+              <div 
+                className={styles.progressBar} 
+                style={{ width: `${loadingProgress[engine.name] || 0}%`, backgroundColor: engine.color }} 
+              ></div>
+            </div>
+            {loadingProgress[engine.name] !== undefined && (
+              <div className={styles.engineLoading}>
+                {loadingProgress[engine.name] < 100 ? 'Checking...' : 'Done'}
+              </div>
+            )}
           </div>
         ))}
       </div>
 
       <div className={styles.progressCard}>
-        <h2 className={styles.cardTitle}>Scan Progress</h2>
+        <h2 className={styles.cardTitle}>Overall Scan Progress</h2>
         <div className={styles.progressBarContainer}>
-          <div className={styles.progressBar} style={{width: `${progress}%`}}></div>
+          <div 
+            className={styles.progressBar} 
+            style={{ width: `${overallProgress}%`, transition: 'width 0.5s ease-in-out' }} 
+          ></div>
         </div>
-        <div className={styles.progressText}>{progress}% Complete</div>
+        <div className={styles.progressText}>{overallProgress}% Complete</div>
       </div>
 
       <div className={styles.actionArea}>
