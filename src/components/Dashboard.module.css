@@ -1,153 +1,215 @@
-/* Dashboard.module.css */
+/* Container */
 .container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  background-color: #f5f5f7;
+  height: 100vh; /* Full viewport height */
+  background-color: #1a1a1a; /* Dark background */
   font-family: 'Arial', sans-serif;
-  color: #333;
+  color: #ffffff; /* Light text color */
 }
 
+/* Sidebar */
+.sidebar {
+  width: 240px; /* Sidebar width */
+  background-color: #2b2b2b; /* Darker sidebar background */
+  height: 100vh; /* Sidebar height matches viewport */
+  padding: 20px;
+  position: fixed; /* Sidebar stays fixed on the left */
+  left: 0;
+  top: 0;
+}
+
+.sidebarTitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Subtle shadow */
+}
+
+.sidebarMenu {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebarMenu li {
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.sidebarMenu li:hover {
+  color: #3b82f6; /* Hover color change */
+}
+
+/* Main Content Area (Dashboard) */
+.mainContent {
+  margin-left: 340px; /* Shifts content to the right of the sidebar */
+  padding: 20px;
+  width: calc(100% - 240px); /* Ensures it takes up remaining space */
+  overflow-y: auto; /* Allow vertical scrolling if necessary */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the content horizontally */
+}
+
+/* Title */
 .title {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* Subtle shadow for the title */
 }
 
+/* Grid Layout */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1200px; /* Limit the maximum width */
 }
 
+/* Individual Engine Card */
 .engineCard {
-  background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #333; /* Engine card background */
   padding: 20px;
+  border-radius: 8px; /* Rounded corners */
   text-align: center;
-  transition: transform 0.2s;
+  transition: transform 0.2s; /* Animation effect */
 }
 
 .engineCard:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px); /* Slight lift effect on hover */
 }
 
 .engineName {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 20px;
   margin-bottom: 10px;
 }
 
+/* Progress Bar Styles */
 .progressBarContainer {
-  background-color: #e5e7eb;
-  border-radius: 4px;
-  margin-top: 8px;
-  height: 8px;
   width: 100%;
+  height: 10px; /* Bar height */
+  background-color: #555; /* Progress bar background */
+  border-radius: 5px; /* Rounded edges */
 }
 
 .progressBar {
   height: 100%;
-  border-radius: 4px;
-  transition: width 0.5s ease;
+  border-radius: 5px; /* Rounded edges for the filled portion */
 }
 
+/* Engine Loading Text */
 .engineLoading {
-  margin-top: 4px;
-  font-size: 12px;
-  color: #6b7280;
+  margin-top: 5px; /* Spacing above loading text */
 }
 
+/* Overall Progress Card */
 .progressCard {
-  background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #444; /* Overall progress background */
   padding: 20px;
-  margin-top: 20px;
+  border-radius: 8px; /* Rounded corners */
   width: 100%;
-  max-width: 600px;
+  max-width: 600px; /* Limit the maximum width */
+  margin: 20px 0; /* Space above and below */
 }
 
 .cardTitle {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 10px;
+  font-size: 20px;
+  margin-bottom: 10px; /* Space below title */
 }
 
-.progressText {
-  text-align: right;
-  font-weight: 600;
-}
-
+/* Action Area */
 .actionArea {
-  margin-top: 20px;
+  margin-top: 20px; /* Space above action area */
 }
 
+/* Button Styles */
 .button {
-  background-color: #3b82f6;
-  color: #ffffff;
-  border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.2s;
+  padding: 10px 20px; /* Padding around button text */
+  font-size: 16px; /* Button font size */
+  background-color: #3b82f6; /* Button color */
+  color: #fff; /* Text color */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Transition for hover effect */
 }
 
 .button:hover {
-  background-color: #2563eb;
+  background-color: #2563eb; /* Darker shade on hover */
 }
 
 .buttonDisabled {
-  background-color: #d1d5db;
-  color: #6b7280;
-  cursor: not-allowed;
+  background-color: #555; /* Disabled button color */
+  cursor: not-allowed; /* Change cursor to indicate disabled state */
 }
 
-.alertBox {
-  background-color: #d1fae5;
-  border-radius: 8px;
-  padding: 10px;
-  margin-top: 10px;
-  color: #065f46;
-}
-
+/* Scan Results Card */
 .resultsCard {
-  background-color: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin-top: 20px;
-  width: 100%;
-  max-width: 600px;
+  background-color: #333; /* Results card background */
+  padding: 15px; /* Padding inside card */
+  margin: 10px 0; /* Space above and below each results card */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor for expandability */
 }
 
+.resultsCard:hover {
+  background-color: #444; /* Slight color change on hover */
+}
+
+/* Results List Styles */
 .resultsList {
-  list-style: none;
-  padding: 0;
+  list-style: none; /* Remove default list styling */
+  padding: 0; /* No padding */
+  margin: 10px 0 0 0; /* Space above the list */
 }
 
+/* Result Item Styles */
 .resultItem {
-  display: flex;
-  justify-content: space-between;
-  padding: 5px 0;
+  display: flex; /* Flexbox for horizontal layout */
+  justify-content: space-between; /* Space between items */
+  padding: 5px 0; /* Padding above and below each item */
 }
 
+/* Status Styles */
 .statusClean {
-  color: #22c55e;
+  color: #22c55e; /* Green for clean */
 }
 
 .statusInfected {
-  color: #ef4444;
+  color: #ef4444; /* Red for infected */
 }
 
-.noResults {
-  text-align: center;
-  font-style: italic;
-  color: #9ca3af;
+/* Alert Box */
+.alertBox {
+  background-color: #2b2b2b; /* Dark background for alert */
+  color: #ffffff; /* Light text color */
+  padding: 15px; /* Padding around alert */
+  border-radius: 8px; /* Rounded corners */
+  margin-top: 20px; /* Space above */
 }
 
+/* Chatbot Popup */
+.chatBotPopup {
+  position: fixed; /* Fixed position for chatbot */
+  bottom: 20px; /* Distance from bottom */
+  right: 20px; /* Distance from right */
+  background-color: #444; /* Dark background for chatbot */
+  color: #ffffff; /* Light text color */
+  padding: 20px; /* Padding around chatbot content */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
+  z-index: 1000; /* Ensure it is above other elements */
+}
+
+.chatBotPopup {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  border: 1px solid #ccc;
+  background: rgb(0, 0, 0);
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 0 10px
+}

@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+:root {
+  --main-bg-color: black;
+}
+
+a, a:hover, a:focus, a:active {
+  text-decoration: none;
+}
